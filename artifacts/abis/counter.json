@@ -1,0 +1,65 @@
+[
+    {
+        "inputs": [
+            {
+                "name": "_a",
+                "type": "felt"
+            },
+            {
+                "name": "_b",
+                "type": "felt"
+            }
+        ],
+        "name": "multiply",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_a",
+                "type": "felt"
+            },
+            {
+                "name": "_b",
+                "type": "felt"
+            }
+        ],
+        "name": "plus",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_value",
+                "type": "felt"
+            },
+            {
+                "name": "_to_add",
+                "type": "felt"
+            }
+        ],
+        "name": "increment",
+        "outputs": [
+            {
+                "name": "value_new",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
