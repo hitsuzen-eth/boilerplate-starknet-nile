@@ -18,18 +18,6 @@ func set_value{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
     _value : felt):
 
     value.write(_value)
-    let (value_new) = value.read()
-    
-    return ()
-end
-
-@external
-func add_value{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    _value : felt):
-
-    let (value_old) = value.read()
-    value.write(value_old + _value)
-    let (value_new) = value.read()
     
     return ()
 end

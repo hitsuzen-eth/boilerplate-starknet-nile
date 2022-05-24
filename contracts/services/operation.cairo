@@ -19,3 +19,12 @@ func plus{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
 
     return (res)
 end
+
+@view
+func minus{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    _a : felt, _b : felt) -> (res : felt):
+
+    let res = _a - _b
+
+    return (res)
+end

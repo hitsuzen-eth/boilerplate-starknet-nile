@@ -40,5 +40,26 @@
         ],
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_a",
+                "type": "felt"
+            },
+            {
+                "name": "_b",
+                "type": "felt"
+            }
+        ],
+        "name": "minus",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     }
 ]

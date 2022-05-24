@@ -1,37 +1,90 @@
-"""contract.cairo test file."""
 import os
 
 import pytest
 from starkware.starknet.testing.starknet import Starknet
 
-# The path to the contract source code.
 COUNTER = os.path.join("contracts", "endpoints", "counters", "counter.cairo")
+STUB_EXTERNAL = os.path.join("contracts", "endpoints", "stub_externals", "stub_external.cairo")
 
 
-# The testing library uses python's asyncio. So the following
-# decorator and the ``async`` keyword are needed.
 @pytest.mark.asyncio
-async def test_increase_balance():
-    """Test increase_balance method."""
-    # Create a new Starknet class that simulates the StarkNet
-    # system.
+async def test_increment_counter():
     starknet = await Starknet.empty()
 
-    # Deploy the contract.
-    contract = await starknet.deploy(
+    counter = await starknet.deploy(
         source=COUNTER,
     )
 
-    # Invoke increase_balance() twice.
-    await contract.increment_by_one().invoke()
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (0,)
 
-    # Check the result of get_balance().
-    execution_info = await contract.get_counter_value().call()
+    await counter.increment_by_one().invoke()
+
+    execution_info = await counter.get_counter_value().call()
     assert execution_info.result == (1,)
 
-    # Invoke increase_balance() twice.
-    await contract.increment_by_one().invoke()
+    await counter.increment_by_one().invoke()
+    await counter.increment_by_one().invoke()
 
-    # Check the result of get_balance().
-    execution_info = await contract.get_counter_value().call()
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (3,)
+
+@pytest.mark.asyncio
+async def test_decrement_counter():
+    starknet = await Starknet.empty()
+
+    counter = await starknet.deploy(
+        source=COUNTER,
+    )
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (0,)
+    
+    with pytest.raises(Exception):
+        await counter.decrement_by_one().invoke()
+
+    await counter.increment_by_one().invoke()
+    await counter.increment_by_one().invoke()
+    await counter.decrement_by_one().invoke()
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (1,)
+
+    await counter.increment_by_one().invoke()
+    await counter.decrement_by_one().invoke()
+    await counter.decrement_by_one().invoke()
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (0,)
+
+@pytest.mark.asyncio
+async def test_double_effect_counter():
+    starknet = await Starknet.empty()
+
+    counter = await starknet.deploy(
+        source=COUNTER,
+    )
+
+    stub_external = await starknet.deploy(
+        source=STUB_EXTERNAL,
+    )
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (0,)
+
+    await counter.double_effect(stub_external.contract_address).invoke()
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (0,)
+
+    await counter.increment_by_one().invoke()
+    await counter.double_effect(stub_external.contract_address).invoke()
+
+    execution_info = await counter.get_counter_value().call()
     assert execution_info.result == (2,)
+
+    await counter.double_effect(stub_external.contract_address).invoke()
+    await counter.double_effect(stub_external.contract_address).invoke()
+
+    execution_info = await counter.get_counter_value().call()
+    assert execution_info.result == (8,)

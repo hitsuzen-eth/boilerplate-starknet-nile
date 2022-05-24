@@ -1,0 +1,9 @@
+[
+    {
+        "inputs": [],
+        "name": "do_nothing",
+        "outputs": [],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]

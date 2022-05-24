@@ -44,6 +44,27 @@
     {
         "inputs": [
             {
+                "name": "_a",
+                "type": "felt"
+            },
+            {
+                "name": "_b",
+                "type": "felt"
+            }
+        ],
+        "name": "minus",
+        "outputs": [
+            {
+                "name": "res",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "name": "_value",
                 "type": "felt"
             },
@@ -52,7 +73,49 @@
                 "type": "felt"
             }
         ],
-        "name": "increment",
+        "name": "increment_counter",
+        "outputs": [
+            {
+                "name": "value_new",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_value",
+                "type": "felt"
+            },
+            {
+                "name": "_to_remove",
+                "type": "felt"
+            }
+        ],
+        "name": "decrement_counter",
+        "outputs": [
+            {
+                "name": "value_new",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_value",
+                "type": "felt"
+            },
+            {
+                "name": "_multiplier",
+                "type": "felt"
+            }
+        ],
+        "name": "multiply_counter",
         "outputs": [
             {
                 "name": "value_new",
