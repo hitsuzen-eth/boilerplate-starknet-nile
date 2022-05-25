@@ -18,6 +18,8 @@ func increment_by_one{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     let (value) = get_value()
     let (value_incremented) = increment_counter(value, 1)
     set_value(value_incremented)
+    value_incremented = value_incremented + 1
+    # Now get_counter_value() will return +2 instead of +1
 
     return ()
 end
