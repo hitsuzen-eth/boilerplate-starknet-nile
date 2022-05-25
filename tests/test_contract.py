@@ -3,8 +3,8 @@ import os
 import pytest
 from starkware.starknet.testing.starknet import Starknet
 
-COUNTER = os.path.join("contracts", "endpoints", "counters", "counter.cairo")
-STUB_EXTERNAL = os.path.join("contracts", "endpoints", "stub_externals", "stub_external.cairo")
+COUNTER = os.path.join("contracts", "counter", "endpoint.cairo")
+STUB_EXTERNAL = os.path.join("contracts", "stub_external", "endpoint.cairo")
 
 
 @pytest.mark.asyncio

@@ -2,14 +2,14 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 
-from contracts.persistences.counters.counter import (
+from contracts.counter.persistence import (
 set_value,
 get_value)
-from contracts.businesses.counters.counter import (
+from contracts.counter.logic import (
 increment_counter,
 decrement_counter,
 multiply_counter)
-from contracts.endpoints.stub_externals.stub_external_interface import IStubExternal
+from contracts.stub_external.interface import IStubExternal
 
 @external
 func increment_by_one{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
@@ -18,8 +18,6 @@ func increment_by_one{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     let (value) = get_value()
     let (value_incremented) = increment_counter(value, 1)
     set_value(value_incremented)
-    value_incremented = value_incremented + 1
-    # Now get_counter_value() will return +2 instead of +1
 
     return ()
 end
